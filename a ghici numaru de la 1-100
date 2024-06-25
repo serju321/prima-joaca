@@ -1,0 +1,45 @@
+using System;
+
+namespace GuessTheNumberGame
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int numberToGuess = random.Next(1, 101); // Генерация случайного числа от 1 до 100
+            int userGuess = 0;
+            int numberOfGuesses = 0;
+
+            Console.WriteLine("Добро пожаловать в игру 'Угадай число'!");
+            Console.WriteLine("Я загадал число от 1 до 100. Попробуй угадать его.");
+
+            while (userGuess != numberToGuess)
+            {
+                Console.Write("Введите ваше предположение: ");
+                string userInput = Console.ReadLine();
+
+                // Проверка, что ввод пользователя является числом
+                if (int.TryParse(userInput, out userGuess))
+                {
+                    numberOfGuesses++;
+                    if (userGuess > numberToGuess)
+                    {
+                        Console.WriteLine("Слишком высоко! Попробуйте еще раз.");
+                    }
+                    else if (userGuess < numberToGuess)
+                    {
+                        Console.WriteLine("Слишком низко! Попробуйте еще раз.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Пожалуйста, введите действительное число.");
+                }
+            }
+
+            Console.WriteLine($"Поздравляем! Вы угадали число {numberToGuess} за {numberOfGuesses} попыток.");
+            Console.WriteLine("Спасибо за игру!");
+        }
+    }
+}
